@@ -1,0 +1,39 @@
+version: "3.8"
+networks:
+  local:
+    driver: "bridge"
+services:
+  nginx:
+    image: ${NGINX_IMAGE}
+    container_name: nginx
+    restart: always
+    networks:
+      - local
+    depends_on:
+      - php
+    ports:
+      - "80:80"
+    volumes:
+      - ${SERVICE_PROJECT_PATH}:/php
+      - ${NGINX_CONFD}:/etc/nginx/conf.d
+      - ${NGINX_CONF}:/etc/nginx/nginx.conf
+      - ${NGINX_LOG}:/var/log/nginx
+
+  php:
+    image: ${SERVICE_PHP1_IMAGE}
+    container_name: php
+    restart: always
+    networks:
+      - local
+    env_file:
+      - ./php/env/localhost.env
+    volumes:
+      - ${SERVICE_PROJECT_PATH}:/php
+      - ${SERVICE_PHP1_INI}:/usr/local/etc/php/php.ini
+      - ${SERVICE_PHP1_LOG}:/var/log
+      - ${SERVICE_PHP1_TMP}:/tmp
+    expose:
+      - "9000"
+
+
+
