@@ -27,10 +27,7 @@
 1. 拉取代码
 ```
 //把项目克隆到本地
-git clone https://gitee.com/feilisu/docker-dev.git
-
-//切换到wjf分支,这个分支是基本的PHP+Nginx的环境搭建，master分支的服务很多，你们一般不需要。
-git checkout wjf
+git clone https://github.com/mayjiangfei/macdoc.git
 
 ```
 
